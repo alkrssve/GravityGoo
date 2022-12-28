@@ -7,7 +7,9 @@ const MAX_FALL_SPEED_UP = 300
 const MAX_FALL_SPEED_DOWN = -300
 
 onready var anim_player = $AnimationPlayer
+onready var mouth_anim_player = $MouthAnimPlayer
 onready var sprite = $Sprite
+onready var mouth = $Mouth
 onready var ammo_sprite = $Ammo
 onready var timer = $Timer
 
@@ -29,6 +31,11 @@ func _physics_process(delta):
 	if Input.is_action_pressed("fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
 
+	mouth.look_at(get_global_mouse_position())
+	
+	if Input.is_action_just_released("shoot"):
+		play_mouth_anim("fire")
+	
 	var move_dir = 0
 	var grounded = is_on_floor() || is_on_ceiling()
 	if Input.is_action_pressed("right"):
@@ -38,21 +45,38 @@ func _physics_process(delta):
 		move_dir -= 1
 		velocity.x = -1
 	
+	if Input.is_action_just_released("flip_gravity"):
+		if !facing_up:
+			if grounded:
+				y_velo = -20
+				play_anim("blob")
+				lift = false
+				grounded = false
+			GRAVITY = -10
+		else:
+			if grounded:
+				y_velo = 20
+				play_anim("blob")
+				lift = false
+				grounded = false
+			GRAVITY = 10
+			
+	
 	if Input.is_action_just_released("flip_gravity_up"):
 		if grounded:
-			y_velo = -10
+			y_velo = -20
 			play_anim("blob")
 			lift = false
 			grounded = false
-		GRAVITY = -15
+		GRAVITY = -10
 	
 	if Input.is_action_just_released("flip_gravity_down"):
 		if grounded:
-			y_velo = 10
+			y_velo = 20
 			play_anim("blob")
 			lift = false
 			grounded = false
-		GRAVITY = 15
+		GRAVITY = 10
 	
 	y_velo += GRAVITY
 	
@@ -104,6 +128,11 @@ func play_anim(anim_name):
 	if anim_player.is_playing() and anim_player.current_animation == anim_name:
 		return
 	anim_player.play(anim_name)
+	
+func play_mouth_anim(anim_name):
+	if mouth_anim_player.is_playing() and mouth_anim_player.current_animation == anim_name:
+		return
+	mouth_anim_player.play(anim_name)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name = "blob"):

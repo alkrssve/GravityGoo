@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/Player_Anims.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Player/Mouth.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -47,6 +48,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector2( 0, 1 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("Mouth:region_rect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 30, 14 ) ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "blob"
@@ -62,14 +75,14 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ Rect2( 0, 112, 20, 16 ), Rect2( 20, 112, 20, 16 ), Rect2( 40, 112, 20, 16 ), Rect2( 60, 112, 20, 16 ), Rect2( 80, 112, 20, 16 ) ]
+"values": [ Rect2( 0, 112, 22, 16 ), Rect2( 22, 112, 22, 16 ), Rect2( 44, 112, 22, 16 ), Rect2( 66, 112, 22, 16 ), Rect2( 88, 112, 22, 16 ) ]
 }
 
 [sub_resource type="Animation" id=6]
 resource_name = "float"
 length = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Ammo:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -78,10 +91,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Rect2( 60, 80, 20, 16 ) ]
+"values": [ Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Ammo:position")
+tracks/1/path = NodePath("Sprite:region_rect")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -89,8 +102,8 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"update": 1,
+"values": [ Rect2( 66, 80, 22, 16 ) ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -98,7 +111,7 @@ resource_name = "idle"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Ammo:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -106,11 +119,11 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Rect2( 80, 48, 20, 16 ), Rect2( 100, 48, 20, 16 ), Rect2( 120, 48, 20, 16 ), Rect2( 140, 48, 20, 16 ) ]
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 1 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Ammo:position")
+tracks/1/path = NodePath("Sprite:region_rect")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -118,8 +131,8 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 1 ), Vector2( 0, 0 ) ]
+"update": 1,
+"values": [ Rect2( 88, 48, 22, 16 ), Rect2( 110, 48, 22, 16 ), Rect2( 132, 48, 22, 16 ), Rect2( 154, 48, 22, 16 ) ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -127,7 +140,7 @@ resource_name = "idle_flip"
 length = 0.6
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Ammo:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -135,11 +148,11 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Rect2( 80, 48, 20, 16 ), Rect2( 100, 48, 20, 16 ), Rect2( 120, 48, 20, 16 ), Rect2( 140, 48, 20, 16 ) ]
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, -1 ), Vector2( 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Ammo:position")
+tracks/1/path = NodePath("Sprite:region_rect")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -147,8 +160,8 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, -1 ), Vector2( 0, 0 ) ]
+"update": 1,
+"values": [ Rect2( 88, 48, 22, 16 ), Rect2( 110, 48, 22, 16 ), Rect2( 132, 48, 22, 16 ), Rect2( 154, 48, 22, 16 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -156,48 +169,19 @@ resource_name = "move"
 length = 0.4
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/path = NodePath("Ammo:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Rect2( 80, 16, 20, 16 ), Rect2( 100, 16, 20, 16 ), Rect2( 120, 16, 20, 16 ), Rect2( 140, 16, 20, 16 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Ammo:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 1 ), Vector2( 0, 2 ), Vector2( 0, 1 ) ]
 }
-
-[sub_resource type="Animation" id=7]
-resource_name = "move_flip"
-length = 0.4
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ Rect2( 80, 16, 20, 16 ), Rect2( 100, 16, 20, 16 ), Rect2( 120, 16, 20, 16 ), Rect2( 140, 16, 20, 16 ) ]
-}
 tracks/1/type = "value"
-tracks/1/path = NodePath("Ammo:position")
+tracks/1/path = NodePath("Sprite:region_rect")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -205,27 +189,76 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 88, 16, 22, 16 ), Rect2( 110, 16, 22, 16 ), Rect2( 132, 16, 22, 16 ), Rect2( 154, 16, 22, 16 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "move_flip"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ammo:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, -1 ), Vector2( 0, -2 ), Vector2( 0, -1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 88, 16, 22, 16 ), Rect2( 110, 16, 22, 16 ), Rect2( 132, 16, 22, 16 ), Rect2( 154, 16, 22, 16 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "fire"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Mouth:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 30, 14 ), Rect2( 30, 0, 30, 14 ), Rect2( 60, 0, 30, 14 ), Rect2( 90, 0, 30, 14 ), Rect2( 0, 14, 30, 14 ) ]
 }
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1, 0 )
+z_index = 2
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 20, 16 )
 
 [node name="Mouth" type="Sprite" parent="."]
-position = Vector2( 11, 0 )
-z_index = 5
-texture = ExtResource( 2 )
+position = Vector2( 1, 0 )
+z_index = 3
+texture = ExtResource( 3 )
 region_enabled = true
-region_rect = Rect2( 0, 96, 20, 16 )
+region_rect = Rect2( 0, 0, 30, 14 )
 
 [node name="Ammo" type="Sprite" parent="."]
 position = Vector2( 0, 1 )
+z_index = 5
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 64, 20, 16 )
@@ -233,9 +266,11 @@ region_rect = Rect2( 0, 64, 20, 16 )
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 1, 0 )
 shape = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 0 )
 shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -245,6 +280,9 @@ anims/float = SubResource( 6 )
 anims/idle = SubResource( 3 )
 anims/idle_flip = SubResource( 9 )
 anims/move = SubResource( 4 )
-anims/move_flip = SubResource( 7 )
+anims/move_flip = SubResource( 10 )
+
+[node name="MouthAnimPlayer" type="AnimationPlayer" parent="."]
+anims/fire = SubResource( 11 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
