@@ -1,7 +1,16 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Tiles/Tiles_1.png" type="Texture" id=2]
+[ext_resource path="res://HUD.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/HUD/Hearts_Full.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/HUD/Hearts_Empty.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/HUD/Hearts_Half.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/HUD/Bullets_Empty.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/HUD/Money.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/HUD/Bullets_Full.png" type="Texture" id=9]
+[ext_resource path="res://Font/GameFont.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://Sprites/HUD/Background.png" type="Texture" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -273,7 +282,15 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="Theme" id=23]
+
+[sub_resource type="DynamicFont" id=24]
+size = 8
+font_data = ExtResource( 10 )
+
 [node name="Game" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="Ground" type="TileMap" parent="."]
 z_index = 3
@@ -298,3 +315,89 @@ position = Vector2( 240, 120 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+visible = false
+margin_right = 64.0
+margin_bottom = 64.0
+rect_scale = Vector2( 0.8, 0.3 )
+texture = ExtResource( 11 )
+
+[node name="$" type="TextureRect" parent="HUD"]
+margin_left = 443.0
+margin_top = 4.0
+margin_right = 483.0
+margin_bottom = 44.0
+texture = ExtResource( 8 )
+
+[node name="Money" type="Label" parent="HUD"]
+margin_left = 453.0
+margin_top = 9.0
+margin_right = 493.0
+margin_bottom = 34.0
+theme = SubResource( 23 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 24 )
+text = "000000
+"
+
+[node name="Life" type="Control" parent="HUD"]
+margin_left = 5.0
+margin_top = 1.0
+margin_right = 45.0
+margin_bottom = 41.0
+
+[node name="HealthEmpty" type="TextureRect" parent="HUD/Life"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 17.0
+margin_bottom = 15.0
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 2
+
+[node name="HealthHalf" type="TextureRect" parent="HUD/Life"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 17.0
+margin_bottom = 15.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 2
+
+[node name="HealthFull" type="TextureRect" parent="HUD/Life"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 17.0
+margin_bottom = 15.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 2
+
+[node name="Bullets" type="Control" parent="HUD"]
+margin_left = -15.0
+margin_top = 12.0
+margin_right = 25.0
+margin_bottom = 52.0
+
+[node name="AmmoEmpty" type="TextureRect" parent="HUD/Bullets"]
+margin_left = 18.0
+margin_top = 3.0
+margin_right = 31.0
+margin_bottom = 15.0
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 2
+
+[node name="AmmoFull" type="TextureRect" parent="HUD/Bullets"]
+margin_left = 18.0
+margin_top = 3.0
+margin_right = 31.0
+margin_bottom = 15.0
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 2
