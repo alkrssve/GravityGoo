@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Player/Player_Anims.png" type="Texture" id=2]
@@ -239,6 +239,86 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 0, 30, 14 ), Rect2( 30, 0, 30, 14 ), Rect2( 60, 0, 30, 14 ), Rect2( 90, 0, 30, 14 ), Rect2( 0, 14, 30, 14 ) ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "float"
+
+[sub_resource type="AnimationNodeTransition" id=13]
+input_count = 2
+input_0/name = "not flip"
+input_0/auto_advance = false
+input_1/name = "flip"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeTransition" id=22]
+input_count = 2
+input_0/name = "ground"
+input_0/auto_advance = false
+input_1/name = "air"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "blob"
+
+[sub_resource type="AnimationNodeTransition" id=15]
+input_count = 2
+input_0/name = "Falling"
+input_0/auto_advance = false
+input_1/name = "Floating"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "idle_flip"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "move_flip"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "move"
+
+[sub_resource type="AnimationNodeTransition" id=20]
+input_count = 2
+input_0/name = "idle"
+input_0/auto_advance = false
+input_1/name = "move"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeTransition" id=21]
+input_count = 2
+input_0/name = "idle"
+input_0/auto_advance = false
+input_1/name = "move"
+input_1/auto_advance = false
+
+[sub_resource type="AnimationNodeBlendTree" id=23]
+graph_offset = Vector2( -156.387, 99.0295 )
+nodes/Animation/node = SubResource( 12 )
+nodes/Animation/position = Vector2( 420, 560 )
+nodes/CheckFlip/node = SubResource( 13 )
+nodes/CheckFlip/position = Vector2( 480, 180 )
+nodes/CheckSurface/node = SubResource( 22 )
+nodes/CheckSurface/position = Vector2( 880, 240 )
+nodes/Fall/node = SubResource( 14 )
+nodes/Fall/position = Vector2( 420, 420 )
+nodes/FallComplete/node = SubResource( 15 )
+nodes/FallComplete/position = Vector2( 620, 460 )
+nodes/Idle/node = SubResource( 17 )
+nodes/Idle/position = Vector2( 40, 0 )
+"nodes/Idle Flip/node" = SubResource( 16 )
+"nodes/Idle Flip/position" = Vector2( 20, 380 )
+nodes/Move/node = SubResource( 19 )
+nodes/Move/position = Vector2( 40, 120 )
+"nodes/Move Flip/node" = SubResource( 18 )
+"nodes/Move Flip/position" = Vector2( 20, 260 )
+nodes/Movement/node = SubResource( 21 )
+nodes/Movement/position = Vector2( 240, 100 )
+"nodes/Movement Flip/node" = SubResource( 20 )
+"nodes/Movement Flip/position" = Vector2( 220, 260 )
+nodes/output/position = Vector2( 1180, 240 )
+node_connections = [ "FallComplete", 0, "Fall", "FallComplete", 1, "Animation", "Movement", 0, "Idle", "Movement", 1, "Move", "Movement Flip", 0, "Move Flip", "Movement Flip", 1, "Idle Flip", "CheckFlip", 0, "Movement", "CheckFlip", 1, "Movement Flip", "CheckSurface", 0, "CheckFlip", "CheckSurface", 1, "FallComplete", "output", 0, "CheckSurface" ]
+
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 script = ExtResource( 1 )
 
@@ -285,4 +365,18 @@ anims/move_flip = SubResource( 10 )
 [node name="MouthAnimPlayer" type="AnimationPlayer" parent="."]
 anims/fire = SubResource( 11 )
 
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 23 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/CheckFlip/current = 1
+parameters/CheckSurface/current = 1
+parameters/FallComplete/current = 0
+parameters/Movement/current = 1
+"parameters/Movement Flip/current" = 1
+
+[node name="Damage" type="Timer" parent="."]
+wait_time = 0.25
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="Damage" to="." method="_on_Damage_timeout"]
