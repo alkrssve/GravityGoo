@@ -1,7 +1,5 @@
 extends KinematicBody2D
 
-signal throw_item()
-
 var MOVE_SPEED = 100
 var BULLET_SPEED = 125
 var FIRE_RATE = 0.5
@@ -14,11 +12,13 @@ onready var anim_player = $AnimationPlayer
 onready var mouth_anim_player = $MouthAnimPlayer
 onready var sprite = $Sprite
 onready var mouth = $Mouth
+onready var area = $Area2D
 onready var ammo_sprite = $Ammo
 onready var timer = $Timer
 
 var bullet = preload("res://Bullet.tscn")
 var can_fire = true
+var refill_started = false
 
 var velocity = Vector2(0,0)
 var y_velo = 0
@@ -43,12 +43,17 @@ func _physics_process(delta):
 
 	mouth.look_at(get_global_mouse_position())
 	
-	if can_fire and Input.is_action_pressed("shoot"):
+	if Global.bullets > 0 and can_fire and Input.is_action_pressed("shoot"):
+		Global.lose_bullet()
+		play_mouth_anim("fire")
+		if !refill_started:
+			$AmmoRefill.start()
+			refill_started = true
 		fire()
 		can_fire = false
 		yield(get_tree().create_timer(FIRE_RATE), "timeout")
 		can_fire = true
-		
+
 	
 	var move_dir = 0
 	var grounded = is_on_floor() || is_on_ceiling()
@@ -58,6 +63,8 @@ func _physics_process(delta):
 	elif Input.is_action_pressed("left"):
 		move_dir -= 1
 		velocity.x = -1
+	
+	Global.facing_up = facing_up
 	
 	if Input.is_action_just_released("flip_gravity"):
 		if !facing_up:
@@ -131,11 +138,8 @@ func _physics_process(delta):
 			
 func fire():
 	var bullet_instance = bullet.instance()
-	if facing_right:
-		bullet_instance.position.x = position.x
-	else:
-		bullet_instance.position.x = position.x
-	bullet_instance.position.y = position.y
+	bullet_instance.position.x = position.x + (get_viewport().get_mouse_position().x/60)
+	bullet_instance.position.y = position.y + (get_viewport().get_mouse_position().y/60)
 	get_parent().add_child(bullet_instance)
 		
 func flip_h():
@@ -181,7 +185,12 @@ func _on_Damage_timeout():
 	set_modulate(Color(1,1,1,1))
 	invincible = false
 
+func _on_AmmoRefill_timeout():
+	Global.bullets = 4
+	Global.hud.load_bullets()
+	refill_started = false
+	$AmmoRefill.stop()
+	
 func save_position(x,y):
 	position.x = x
 	position.y = y
-

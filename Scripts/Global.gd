@@ -4,7 +4,7 @@ var max_lives = 6
 var lives = max_lives
 var max_bullets = 4
 var bullets = max_bullets
-var coins = 999999
+var coins = 10000000
 var position_lost = false
 var item1_price = "10"
 var item2_price = "10"
@@ -13,6 +13,7 @@ var last_save_x = 0
 var last_save_y = 0
 
 var up_gravity = 10
+var facing_up = false
 
 var canTalk = false
 var talkOver = false

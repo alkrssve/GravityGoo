@@ -86,6 +86,25 @@ shoot={
  ]
 }
 
+[layer_names]
+
+2d_render/layer_1="player"
+2d_render/layer_2="enemies"
+2d_render/layer_3="environment"
+2d_render/layer_4="hazards"
+2d_render/layer_5="coins"
+2d_render/layer_6="paint"
+2d_render/layer_7="npcs"
+2d_render/layer_8="bloodlayer"
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemies"
+2d_physics/layer_3="environment"
+2d_physics/layer_4="hazards"
+2d_physics/layer_5="coins"
+2d_physics/layer_6="paint"
+2d_physics/layer_7="npcs"
+2d_physics/layer_8="bloodlayer"
+
 [physics]
 
 common/enable_pause_aware_picking=true

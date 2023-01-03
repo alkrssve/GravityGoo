@@ -83,12 +83,12 @@ extents = Vector2( 16, 2 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 2, 16 )
 
-[node name="SpikeEnemy" type="KinematicBody2D"]
+[node name="SpikeEnemy" type="KinematicBody2D" groups=["Enemy"]]
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-frame = 8
+frame = 11
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
