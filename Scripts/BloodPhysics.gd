@@ -28,7 +28,7 @@ func _physics_process(delta):
 	if impulse_y < 50: 
 		impulse_y += GRAVITY
 	else:
-		impulse_x = 0
+		impulse_x = impulse_x/2
 	# Apply the impulse to the body
 	move_and_slide(Vector2(impulse_x, impulse_y))
 	
@@ -44,3 +44,7 @@ func _on_Area2D_body_entered(body):
 		set_process_unhandled_input(false)
 		set_process_unhandled_key_input(false)
 	
+
+
+func _on_Timer_timeout():
+	queue_free()

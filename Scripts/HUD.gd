@@ -15,13 +15,13 @@ func _ready():
 
 
 func load_hearts():
-	$Life/HealthFull.rect_size.x = (Global.lives/2 * 16)
+	$Life/HealthFull.rect_size.x = (Global.lives/2 * 17)
 	if Global.lives % 2 == 0:
 		$Life/HealthHalf.rect_size.x = 0
 	if Global.lives % 2 == 1:
-		$Life/HealthHalf.rect_size.x = 16
+		$Life/HealthHalf.rect_size.x = 17
 		
-	$Life/HealthEmpty.rect_size.x = ((Global.max_lives - Global.lives)/2 * 16)
+	$Life/HealthEmpty.rect_size.x = ((Global.max_lives - Global.lives)/2 * 17)
 		
 	$Life/HealthHalf.rect_position.x = $Life/HealthFull.rect_position.x + $Life/HealthFull.rect_size.x * $Life/HealthFull.rect_scale.x
 	$Life/HealthEmpty.rect_position.x = $Life/HealthHalf.rect_position.x + $Life/HealthHalf.rect_size.x * $Life/HealthHalf.rect_scale.x
@@ -45,6 +45,9 @@ func load_coins():
 	#	for i in range(0, zeroes.size() - String(Global.coins).length()):
 	#		temp_zeroes += String(zeroes[i])
 	#	$Money.text = temp_zeroes + String(Global.coins)
+	
+func load_keys():
+	$Keys/KeyAmount.text = String(Global.keys)
 	
 func play_anim(anim_name):
 	if anim_player.is_playing() and anim_player.current_animation == anim_name:

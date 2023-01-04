@@ -30,10 +30,7 @@ func _physics_process(delta):
 
 
 func _on_Area2D_body_entered(body):
-	if body.is_in_group("Enemy"):
-		queue_free()
-		
-	if body.is_in_group("Ground"):
+	if body.is_in_group("Ground") or body.is_in_group("Enemy"):
 		for i in range(3):
 			var blood_instance = blood.instance()
 			get_tree().current_scene.add_child(blood_instance)

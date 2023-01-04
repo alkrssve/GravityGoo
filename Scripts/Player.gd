@@ -136,6 +136,16 @@ func _physics_process(delta):
 		elif y_velo > 0 and lift:
 			play_anim("float")
 			
+	if Global.bullets == 4:
+		$Ammo.region_rect = Rect2(0,64,20,16)
+	elif Global.bullets == 3:
+		$Ammo.region_rect = Rect2(22,64,20,16)
+	elif Global.bullets == 2:
+		$Ammo.region_rect = Rect2(44,64,20,16)
+	elif Global.bullets == 1:
+		$Ammo.region_rect = Rect2(66,64,20,16)
+	elif Global.bullets == 0:	
+		$Ammo.region_rect = Rect2(88,64,20,16)
 func fire():
 	var bullet_instance = bullet.instance()
 	bullet_instance.position.x = position.x + (get_viewport().get_mouse_position().x/60)
@@ -194,3 +204,6 @@ func _on_AmmoRefill_timeout():
 func save_position(x,y):
 	position.x = x
 	position.y = y
+
+func _on_coin_collected(coin_type):
+	Global.collect_money(coin_type)

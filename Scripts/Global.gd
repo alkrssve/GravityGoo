@@ -1,10 +1,11 @@
 extends Node
 
-var max_lives = 6
+var max_lives = 8
 var lives = max_lives
 var max_bullets = 4
 var bullets = max_bullets
-var coins = 10000000
+var coins = 100000
+var keys = 0
 var position_lost = false
 var item1_price = "10"
 var item2_price = "10"
@@ -43,6 +44,13 @@ func collect_money(coinType):
 		coins += 5
 	if (coinType == 2):
 		coins += 10
+	if (coinType == 3):
+		coins += 25
+	if (coinType == 4):
+		keys += 1
+	if (coinType == 5):
+		bullets = max_bullets
+	hud.load_keys()
 	hud.load_coins()
 	
 func set_save_position(x,y):

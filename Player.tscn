@@ -317,7 +317,7 @@ nodes/Movement/position = Vector2( 240, 100 )
 "nodes/Movement Flip/node" = SubResource( 20 )
 "nodes/Movement Flip/position" = Vector2( 220, 260 )
 nodes/output/position = Vector2( 1180, 240 )
-node_connections = [ "output", 0, "CheckSurface", "FallComplete", 0, "Fall", "FallComplete", 1, "Animation", "Movement Flip", 0, "Move Flip", "Movement Flip", 1, "Idle Flip", "CheckSurface", 0, "CheckFlip", "CheckSurface", 1, "FallComplete", "Movement", 0, "Idle", "Movement", 1, "Move", "CheckFlip", 0, "Movement", "CheckFlip", 1, "Movement Flip" ]
+node_connections = [ "output", 0, "CheckSurface", "Movement", 0, "Idle", "Movement", 1, "Move", "Movement Flip", 0, "Move Flip", "Movement Flip", 1, "Idle Flip", "CheckFlip", 0, "Movement", "CheckFlip", 1, "Movement Flip", "FallComplete", 0, "Fall", "FallComplete", 1, "Animation", "CheckSurface", 0, "CheckFlip", "CheckSurface", 1, "FallComplete" ]
 
 [node name="Player" type="KinematicBody2D" groups=["Player"]]
 script = ExtResource( 1 )

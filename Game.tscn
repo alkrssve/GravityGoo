@@ -1,21 +1,27 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Tiles/Tiles_1.png" type="Texture" id=2]
-[ext_resource path="res://HUD.gd" type="Script" id=3]
+[ext_resource path="res://Scripts/HUD.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/HUD/Hearts_Full.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/HUD/Hearts_Empty.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/HUD/Hearts_Half.png" type="Texture" id=6]
 [ext_resource path="res://Sprites/HUD/Bullets_Empty.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/HUD/Money.png" type="Texture" id=8]
 [ext_resource path="res://Sprites/HUD/Bullets_Full.png" type="Texture" id=9]
-[ext_resource path="res://Font/ThinFont.ttf" type="DynamicFontData" id=10]
-[ext_resource path="res://Sprites/HUD/Background.png" type="Texture" id=11]
+[ext_resource path="res://Font/Leg Fong.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://Sprites/Background/Background_2.png" type="Texture" id=11]
 [ext_resource path="res://Spike.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Sprites/Background/Background_1.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/NPCs/Gront.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/HUD/Bullets_Animation.png" type="Texture" id=15]
-[ext_resource path="res://Vignette.tres" type="Shader" id=16]
+[ext_resource path="res://Shaders/Vignette.tres" type="Shader" id=16]
+[ext_resource path="res://Sprites/Background/Background_3.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Tiles/Light2.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/HUD/Keys.png" type="Texture" id=19]
+[ext_resource path="res://Coin.tscn" type="PackedScene" id=20]
+[ext_resource path="res://SaveStatue.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Sprites/Background/Background_4.png" type="Texture" id=22]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -331,12 +337,86 @@ tracks/0/keys = {
 "values": [ Rect2( 0, 0, 15, 14 ), Rect2( 15, 0, 15, 14 ), Rect2( 30, 0, 15, 14 ), Rect2( 45, 0, 15, 14 ), Rect2( 60, 0, 15, 14 ), Rect2( 75, 0, 15, 14 ) ]
 }
 
+[sub_resource type="DynamicFont" id=29]
+size = 8
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 10 )
+
+[sub_resource type="AtlasTexture" id=30]
+atlas = ExtResource( 14 )
+region = Rect2( 0, 0, 56, 56 )
+
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 14 )
+region = Rect2( 56, 0, 56, 56 )
+
+[sub_resource type="AtlasTexture" id=32]
+atlas = ExtResource( 14 )
+region = Rect2( 112, 0, 56, 56 )
+
+[sub_resource type="AtlasTexture" id=33]
+atlas = ExtResource( 14 )
+region = Rect2( 168, 0, 56, 56 )
+
+[sub_resource type="AtlasTexture" id=34]
+atlas = ExtResource( 14 )
+region = Rect2( 224, 0, 56, 56 )
+
+[sub_resource type="SpriteFrames" id=35]
+animations = [ {
+"frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 30 ), SubResource( 30 ), SubResource( 30 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+} ]
+
 [node name="Game" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.01, 0.01 )
+motion_mirroring = Vector2( 816, 600 )
+
+[node name="Sun" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+position = Vector2( 64, -75 )
+texture = ExtResource( 18 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+motion_scale = Vector2( 0.3, 1 )
+motion_mirroring = Vector2( 614, 600 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+position = Vector2( 494, -160 )
+texture = ExtResource( 22 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 816, 600 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 408, -60 )
+texture = ExtResource( 17 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+position = Vector2( 408, 112 )
+texture = ExtResource( 17 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.7, 1 )
+motion_mirroring = Vector2( 816, 600 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 248, -8 )
+texture = ExtResource( 11 )
+
+[node name="Sprite2" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+position = Vector2( 408, 60 )
+texture = ExtResource( 11 )
+
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.9, 1 )
+motion_scale = Vector2( 0.6, 1 )
 motion_mirroring = Vector2( 816, 600 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
@@ -403,42 +483,35 @@ anchor_bottom = 1.0
 layer = 2
 script = ExtResource( 3 )
 
-[node name="TextureRect" type="TextureRect" parent="HUD"]
-visible = false
-margin_right = 64.0
-margin_bottom = 64.0
-rect_scale = Vector2( 0.8, 0.3 )
-texture = ExtResource( 11 )
-
 [node name="$" type="TextureRect" parent="HUD"]
-margin_left = 427.0
+margin_left = 424.0
 margin_top = 3.0
-margin_right = 467.0
+margin_right = 464.0
 margin_bottom = 43.0
 texture = ExtResource( 8 )
 
 [node name="Money" type="Label" parent="HUD"]
-margin_left = 438.0
+margin_left = 435.0
 margin_top = 7.0
-margin_right = 480.0
+margin_right = 477.0
 margin_bottom = 32.0
 theme = SubResource( 23 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 24 )
-text = "00000000
+text = "000000
 "
 
 [node name="Life" type="Control" parent="HUD"]
-margin_left = 6.0
-margin_right = 46.0
+margin_left = -1.0
+margin_right = 39.0
 margin_bottom = 40.0
 
 [node name="HealthEmpty" type="TextureRect" parent="HUD/Life"]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 19.0
-margin_bottom = 16.0
+margin_right = 20.0
+margin_bottom = 17.0
 texture = ExtResource( 5 )
 expand = true
 stretch_mode = 2
@@ -446,8 +519,8 @@ stretch_mode = 2
 [node name="HealthHalf" type="TextureRect" parent="HUD/Life"]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 19.0
-margin_bottom = 16.0
+margin_right = 20.0
+margin_bottom = 17.0
 texture = ExtResource( 6 )
 expand = true
 stretch_mode = 2
@@ -455,13 +528,14 @@ stretch_mode = 2
 [node name="HealthFull" type="TextureRect" parent="HUD/Life"]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 19.0
-margin_bottom = 16.0
+margin_right = 20.0
+margin_bottom = 17.0
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 2
 
 [node name="Bullets" type="Control" parent="HUD"]
+visible = false
 margin_left = -15.0
 margin_top = 12.0
 margin_right = 25.0
@@ -495,10 +569,81 @@ region_rect = Rect2( 0, 0, 15, 14 )
 anims/RESET = SubResource( 25 )
 anims/shoot = SubResource( 26 )
 
+[node name="Keys" type="Control" parent="HUD"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="KeyIcon" type="TextureRect" parent="HUD/Keys"]
+margin_left = 76.0
+margin_top = 3.0
+margin_right = 116.0
+margin_bottom = 43.0
+texture = ExtResource( 19 )
+
+[node name="KeyAmount" type="Label" parent="HUD/Keys"]
+margin_left = 102.0
+margin_top = 8.0
+margin_right = 142.0
+margin_bottom = 22.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 29 )
+text = "0"
+
 [node name="NPCs" type="Node2D" parent="."]
 
-[node name="Gront" type="Sprite" parent="NPCs"]
-position = Vector2( 25, 52 )
-texture = ExtResource( 14 )
-region_enabled = true
-region_rect = Rect2( 0, 0, 56, 56 )
+[node name="Gront" type="AnimatedSprite" parent="NPCs"]
+position = Vector2( 37, 53 )
+frames = SubResource( 35 )
+frame = 3
+playing = true
+flip_h = true
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource( 20 )]
+position = Vector2( -13, 75 )
+
+[node name="Coin2" parent="Coins" instance=ExtResource( 20 )]
+position = Vector2( -24, 75 )
+
+[node name="Coin3" parent="Coins" instance=ExtResource( 20 )]
+position = Vector2( -35, 75 )
+
+[node name="Coin4" parent="Coins" instance=ExtResource( 20 )]
+position = Vector2( 223, -54 )
+coinType = 1
+
+[node name="Coin6" parent="Coins" instance=ExtResource( 20 )]
+position = Vector2( 23, -153 )
+coinType = 2
+
+[node name="Coin5" parent="Coins" instance=ExtResource( 20 )]
+position = Vector2( 100, -272 )
+coinType = 3
+
+[node name="Key" parent="Coins" instance=ExtResource( 20 )]
+position = Vector2( -276, -48 )
+coinType = 4
+
+[node name="Ammo" parent="Coins" instance=ExtResource( 20 )]
+position = Vector2( -332, -119 )
+coinType = 5
+
+[node name="Ammo2" parent="Coins" instance=ExtResource( 20 )]
+position = Vector2( -356, -119 )
+coinType = 5
+
+[node name="SaveStatues" type="Node2D" parent="."]
+
+[node name="SaveStatue" parent="SaveStatues" instance=ExtResource( 21 )]
+position = Vector2( -92, -168 )
+
+[connection signal="coin_collected" from="Coins/Coin" to="Player" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin2" to="Player" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin3" to="Player" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin4" to="Player" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin6" to="Player" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Coin5" to="Player" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Key" to="Player" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Ammo" to="Player" method="_on_coin_collected"]
+[connection signal="coin_collected" from="Coins/Ammo2" to="Player" method="_on_coin_collected"]
