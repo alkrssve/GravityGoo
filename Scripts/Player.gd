@@ -131,9 +131,9 @@ func _physics_process(delta):
 			else:
 				play_anim("move")
 	else:
-		if y_velo < 0 and lift:
+		if y_velo < 0:
 			play_anim("float")
-		elif y_velo > 0 and lift:
+		elif y_velo > 0:
 			play_anim("float")
 			
 	if Global.bullets == 4:

@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Font/Leg Fong.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://NPC.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/NPCs/Gront.png" type="Texture" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 25, 19 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 56, 56 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 56, 0, 56, 56 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 112, 0, 56, 56 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 168, 0, 56, 56 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 224, 0, 56, 56 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 4 ), SubResource( 4 ), SubResource( 4 ) ],
+"loop": true,
+"name": "Gront",
+"speed": 7.0
+} ]
+
+[node name="NPC" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="E" type="Label" parent="."]
+visible = false
+margin_left = 6.0
+margin_top = -21.0
+margin_right = 46.0
+margin_bottom = -7.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "E"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1, 9 )
+shape = SubResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+animation = "Gront"
+frame = 6
+playing = true
+
+[connection signal="area_entered" from="." to="." method="_on_NPC_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_NPC_area_exited"]
