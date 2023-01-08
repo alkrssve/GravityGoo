@@ -10,7 +10,7 @@ func _ready():
 	load_coins()
 	load_bullets()
 	Global.hud = self
-	zeroes.resize(8)
+	zeroes.resize(5)
 	zeroes.fill(0)
 
 
@@ -39,12 +39,21 @@ func load_bullets():
 		sprite.position.x = -50
 	
 func load_coins():
-	$Money.text = String(Global.coins)
-	#if String(Global.coins).length() < zeroes.size():
-	#	var temp_zeroes = ""
-	#	for i in range(0, zeroes.size() - String(Global.coins).length()):
-	#		temp_zeroes += String(zeroes[i])
-	#	$Money.text = temp_zeroes + String(Global.coins)
+	
+	if Global.coins >= 100000:
+		$Money.text = String(Global.coins)
+	elif Global.coins >= 10000:
+		$Money.text = "0" + String(Global.coins)
+	elif Global.coins >= 1000:
+		$Money.text = "00" + String(Global.coins)
+	elif Global.coins >= 100:
+		$Money.text = "000" + String(Global.coins)
+	elif Global.coins >= 10:
+		$Money.text = "0000" + String(Global.coins)
+	elif Global.coins > 0:
+		$Money.text = "00000" + String(Global.coins)
+	else:
+		$Money.text = "000000"
 	
 func load_keys():
 	$Keys/KeyAmount.text = String(Global.keys)

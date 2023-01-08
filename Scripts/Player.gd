@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var MOVE_SPEED = 100
+var MOVE_SPEED = 115
 var BULLET_SPEED = 125
 var FIRE_RATE = 0.5
 const JUMP_FORCE = 225
@@ -43,6 +43,9 @@ func _physics_process(delta):
 
 	mouth.look_at(get_global_mouse_position())
 	
+	if Input.is_action_just_pressed("eat"):
+		play_mouth_anim("eat")
+	
 	if Global.bullets > 0 and can_fire and Input.is_action_pressed("shoot"):
 		Global.lose_bullet()
 		play_mouth_anim("fire")
@@ -69,35 +72,35 @@ func _physics_process(delta):
 	if Input.is_action_just_released("flip_gravity"):
 		if !facing_up:
 			if grounded:
-				y_velo = -20
+				y_velo = -16
 				play_anim("blob")
 				lift = false
 				grounded = false
-			GRAVITY = -10
+			GRAVITY = -8
 		else:
 			if grounded:
-				y_velo = 20
+				y_velo = 16
 				play_anim("blob")
 				lift = false
 				grounded = false
-			GRAVITY = 10
+			GRAVITY = 8
 			
 	
 	if Input.is_action_just_released("flip_gravity_up"):
 		if grounded:
-			y_velo = -20
+			y_velo = -16
 			play_anim("blob")
 			lift = false
 			grounded = false
-		GRAVITY = -10
+		GRAVITY = -8
 	
 	if Input.is_action_just_released("flip_gravity_down"):
 		if grounded:
-			y_velo = 20
+			y_velo = 16
 			play_anim("blob")
 			lift = false
 			grounded = false
-		GRAVITY = 10
+		GRAVITY = 8
 	
 	y_velo += GRAVITY
 	
@@ -146,6 +149,15 @@ func _physics_process(delta):
 		$Ammo.region_rect = Rect2(66,64,20,16)
 	elif Global.bullets == 0:	
 		$Ammo.region_rect = Rect2(88,64,20,16)
+
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		if collision.collider.is_in_group("Danger") and !invincible:
+			Global.lose_life()
+			set_modulate(Color(0,0.0,0.0,0.3))
+			invincible = true
+			$Damage.start()
+			
 func fire():
 	var bullet_instance = bullet.instance()
 	bullet_instance.position.x = position.x + (get_viewport().get_mouse_position().x/60)

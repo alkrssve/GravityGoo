@@ -10,7 +10,7 @@ gradient = SubResource( 55 )
 [resource]
 lifetime_randomness = 0.1
 emission_shape = 1
-emission_sphere_radius = 3.81
+emission_sphere_radius = 3.85
 flag_disable_z = true
 direction = Vector3( 0, 50, 0 )
 spread = 158.75

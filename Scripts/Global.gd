@@ -4,7 +4,7 @@ var max_lives = 8
 var lives = max_lives
 var max_bullets = 4
 var bullets = max_bullets
-var coins = 100000
+var coins = 0
 var keys = 0
 var position_lost = false
 var item1_price = "10"
@@ -29,7 +29,7 @@ func lose_life():
 	hud.load_hearts()
 	if lives <= 0:
 		position_lost = true
-		player.save_position(last_save_x,last_save_y)
+		player.save_position(-59,120)
 		lives = max_lives
 		hud.load_hearts()
 		
