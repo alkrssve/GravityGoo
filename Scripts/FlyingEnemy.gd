@@ -13,7 +13,7 @@ var dead = false
 func _physics_process(delta):
 	get_direction()
 	if $WallCheck.is_colliding():
-		direction.y = -5
+		direction.y = -1
 	velocity = calculate_velocity(direction,velocity,delta)
 	move_and_slide(velocity)
 	

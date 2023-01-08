@@ -46,7 +46,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "Shop"
-frame = 3
+frame = 7
 playing = true
 
 [node name="E" type="Label" parent="."]

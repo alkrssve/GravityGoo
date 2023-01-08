@@ -23,8 +23,10 @@ var scn
 var hud
 var shop
 var player
+var camera
 
 func lose_life():
+	camera.shake(0.25,2)
 	lives -= 1
 	hud.load_hearts()
 	if lives <= 0:

@@ -410,7 +410,7 @@ parameters/Movement/current = 1
 "parameters/Movement Flip/current" = 1
 
 [node name="Damage" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.5
 
 [node name="AmmoRefill" type="Timer" parent="."]
 wait_time = 5.0
