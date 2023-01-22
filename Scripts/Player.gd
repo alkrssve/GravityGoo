@@ -35,8 +35,7 @@ func _ready():
 
 func _physics_process(delta):
 	
-	if Input.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+	Global.player_position = global_position
 	
 	if Input.is_action_pressed("fullscreen"):
 		OS.window_fullscreen = !OS.window_fullscreen
@@ -56,17 +55,25 @@ func _physics_process(delta):
 		can_fire = false
 		yield(get_tree().create_timer(FIRE_RATE), "timeout")
 		can_fire = true
-
 	
+		
+	var move_multi = 1
 	var move_dir = 0
 	var grounded = is_on_floor() || is_on_ceiling()
 	if Input.is_action_pressed("right"):
-		move_dir += 1
+		move_dir += 1 * move_multi
 		velocity.x = 1
 	elif Input.is_action_pressed("left"):
-		move_dir -= 1
+		move_dir -= 1 * move_multi
 		velocity.x = -1
-	
+		
+	if grounded and Input.is_action_pressed("speed_up"):
+		MOVE_SPEED = 150
+		anim_player.playback_speed = 2
+	if Input.is_action_just_released("speed_up") || !grounded:
+		MOVE_SPEED = 115
+		$AnimationPlayer.playback_speed = 1
+		
 	Global.facing_up = facing_up
 	
 	if Input.is_action_just_released("flip_gravity"):
@@ -158,6 +165,7 @@ func _physics_process(delta):
 			invincible = true
 			$Damage.start()
 			
+		
 func fire():
 	var bullet_instance = bullet.instance()
 	bullet_instance.position.x = position.x + (get_viewport().get_mouse_position().x/60)
@@ -214,6 +222,7 @@ func _on_AmmoRefill_timeout():
 	$AmmoRefill.stop()
 	
 func save_position(x,y):
+	GRAVITY = 15
 	position.x = x
 	position.y = y
 

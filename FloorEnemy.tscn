@@ -74,3 +74,12 @@ region_rect = Rect2( 10, 0, 10, 17 )
 anims/Idle = SubResource( 2 )
 anims/Move = SubResource( 3 )
 anims/RESET = SubResource( 4 )
+
+[node name="HitDetection" type="Area2D" parent="."]
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitDetection"]
+position = Vector2( 0, 3 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="HitDetection" to="." method="_on_HitDetection_body_entered"]

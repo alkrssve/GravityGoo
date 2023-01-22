@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GravityGoo.png-dc5a1bbdfc46a8b91a551110aa00f330.stex"
+path="res://.import/GravityGooSmall.png-0ca42a375e90a465fd7f554b962af90c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Background/GravityGoo.png"
-dest_files=[ "res://.import/GravityGoo.png-dc5a1bbdfc46a8b91a551110aa00f330.stex" ]
+source_file="res://Sprites/Background/GravityGooSmall.png"
+dest_files=[ "res://.import/GravityGooSmall.png-0ca42a375e90a465fd7f554b962af90c.stex" ]
 
 [params]
 
@@ -24,7 +24,7 @@ flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

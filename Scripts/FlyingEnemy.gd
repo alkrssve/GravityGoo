@@ -10,6 +10,8 @@ var facing_right = true
 
 var dead = false
 
+onready var particle = $Particles2D
+
 func _physics_process(delta):
 	get_direction()
 	if $WallCheck.is_colliding():
@@ -28,12 +30,12 @@ func _physics_process(delta):
 func flip_h():
 	facing_right = !facing_right
 	$Sprite.flip_h = !$Sprite.flip_h
-	if $Particles2D.process_material.direction.x != 1:
-		$Particles2D.process_material.direction.x = 1 
-		$Particles2D.position.x += 10
+	if !facing_right:
+		particle.process_material.direction.x = 1 
+		particle.position.x += 10
 	else:
-		$Particles2D.process_material.direction.x = -1
-		$Particles2D.position.x += -10
+		particle.process_material.direction.x = -1
+		particle.position.x += -10
 
 func get_direction():
 	#left

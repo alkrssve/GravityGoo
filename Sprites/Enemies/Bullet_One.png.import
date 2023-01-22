@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GravityGoo.png-dc5a1bbdfc46a8b91a551110aa00f330.stex"
+path="res://.import/Bullet_One.png-b141d11e58cff83da0aa97273d400874.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Background/GravityGoo.png"
-dest_files=[ "res://.import/GravityGoo.png-dc5a1bbdfc46a8b91a551110aa00f330.stex" ]
+source_file="res://Sprites/Enemies/Bullet_One.png"
+dest_files=[ "res://.import/Bullet_One.png-b141d11e58cff83da0aa97273d400874.stex" ]
 
 [params]
 
@@ -24,7 +24,7 @@ flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

@@ -67,3 +67,9 @@ func calculate_velocity(dir, vel, delta):
 		
 	return new_vel
 		
+
+
+func _on_HitDetection_body_entered(body):
+	if body.is_in_group("PlayerBullet"):
+		queue_free()
+		body.queue_free()

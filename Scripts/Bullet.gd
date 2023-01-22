@@ -36,3 +36,4 @@ func _on_Area2D_body_entered(body):
 			get_tree().current_scene.add_child(blood_instance)
 			blood_instance.global_position = global_position
 			queue_free()
+			
